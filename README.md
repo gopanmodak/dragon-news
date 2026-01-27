@@ -1,16 +1,60 @@
-# React + Vite
+# 🐉 Dragon News  
+### Beginner-Friendly Online News Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dragon News is a simple online news portal web application where users can read news by category and view detailed news articles. Some features are protected and require user login.
 
-Currently, two official plugins are available:
+This project is mainly built for learning React, routing, and authentication.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 📖 Project Overview
+This project is developed using React.  
+It is suitable for beginners who want to practice:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React components  
+- React Router  
+- Authentication  
+- Protected routes  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Features
+- 📰 Display all news on the home page  
+- 📂 Category-wise news filtering  
+- 🔍 News details page  
+- 🔐 Login & Registration system  
+- 🚫 Private routes (login required)  
+- 📱 Responsive design for mobile and desktop  
+
+---
+
+## 🛠️ Technologies Used
+
+### Frontend
+- React  
+- React Router  
+- Tailwind CSS / DaisyUI  
+
+### Authentication
+- Firebase Authentication  
+
+### Others
+- Context API  
+- REST API / JSON data  
+
+---
+
+## 🔐 Authentication System
+- Email & password login  
+- New user registration  
+- Private routes using authentication check  
+
+---
+
+## 🌐 Live Website
+Live link coming soon
+
+---
+
+## 📄 License
+This project is created for learning purposes.
