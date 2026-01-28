@@ -3,14 +3,19 @@ import { Link } from "react-router-dom";
 
 import userImg from "../../assets/user.png";
 import { AuthContext } from "../../provider/AuthProvider";
+import toast from "react-hot-toast";
 const Navbar = () => {
   const { currentUser, userSignOut } = useContext(AuthContext);
 
   const handleOnSignOut = () => {
     userSignOut()
-      .then(() => {})
+      .then(() => {
+              toast.success('User logged out successfully from toaster')
+
+      })
       .catch((error) => {
         console.log(error.message);
+        
       });
   };
   return (
@@ -35,9 +40,9 @@ const Navbar = () => {
             <p className="font-semibold">{currentUser.displayName ||'User'}</p>
           </div>{" "}
           <Link
-            to="/auth/login"
+            to="/"
             onClick={handleOnSignOut}
-            className="btn btn-ghost"
+            className="btn btn-neutral text-white"
           >
             Log Out
           </Link>
@@ -48,7 +53,7 @@ const Navbar = () => {
           <Link
             to="/auth/login"
             type="button"
-            className="text-white bg-gray-900 hover:bg-gray-800  focus:ring-gray-300 shadow-sm font-medium leading-5  text-sm px-4 py-2 focus:outline-none"
+            className="btn btn-neutral text-white"
           >
             Login
           </Link>

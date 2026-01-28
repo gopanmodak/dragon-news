@@ -1,29 +1,25 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const navigate=useNavigate();
   const { userLogin } = useContext(AuthContext);
-  const [successfully, setSuccessMessage] = useState("");
-  const [errorMessage, setErrormessage] = useState("");
   const handleOnFormSubmit = (event) => {
     event.preventDefault();
     const email = event.target.email.value;
     const password = event.target.password.value;
-    setSuccessMessage("");
-    setErrormessage("");
     userLogin(email, password).then(() => {
-      setSuccessMessage("User logged in successfully");
-      setErrormessage("");
+      toast.success('User logged in successfully from toaster');
+      
       navigate("/");
       event.target.reset()
     })
     
     .catch((error) => {
       console.log(error.message);
-      setErrormessage('User not found');
-    });
+      toast.error('Login failed User not found');});
 
     console.log(email, password);
   };
@@ -85,8 +81,6 @@ const Login = () => {
             </Link>
           </p>
 
-          {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-          {successfully && <p className="text-green-600">{successfully}</p>}
         </div>
       </div>
     </div>

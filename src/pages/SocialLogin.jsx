@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { FaGithub, FaGoogle } from 'react-icons/fa'
 import { AuthContext } from '../provider/AuthProvider'
+import toast from 'react-hot-toast'
 
 const SocialLogin = () => {
   const {gooleLogin} =useContext(AuthContext)
@@ -10,6 +11,7 @@ const SocialLogin = () => {
 gooleLogin()
     .then((result)=>{
       console.log(result)
+      toast.success('User logged in successfully from toaster')
     })
     .catch((error)=>{
       console.log(error.message)

@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaStar, FaRegBookmark, FaShareAlt, FaEye } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../provider/AuthProvider";
+import toast from "react-hot-toast";
 
-const NewsCard = ({ NewsData }) => {
+const NewsCard = ({ NewsData, }) => {
+  const {currentUser}=useContext(AuthContext)
   const {
     author,
     title,
@@ -12,9 +16,17 @@ const NewsCard = ({ NewsData }) => {
     published_date,
   } = NewsData;
 
+  const handleOnReadMore=()=>{
+    if(!currentUser){
+      toast.error('Login must')
+    }
+
+  }
+
   return (
     <div className="card w-full bg-base-100 shadow-xl rounded-lg overflow-hidden my-4">
-      {/* Header */}
+
+
       <div className="flex items-center justify-between p-4 border-b">
         <div className="flex items-center gap-3">
           <img
@@ -35,24 +47,26 @@ const NewsCard = ({ NewsData }) => {
         </div>
       </div>
 
-      {/* Image */}
+
       <figure>
         <img src={image_url} alt={title} className="w-full h-60 object-cover" />
       </figure>
 
-      {/* Body */}
+
+
       <div className="p-4">
         <h2 className="card-title text-xl font-bold">{title}</h2>
         <p className="text-gray-600 my-2">
           {details.length > 150 ? details.slice(0, 150) + "..." : details}
-          <span className="text-blue-500 font-semibold cursor-pointer">
+          <Link to={`/news/${NewsData._id}`}  className="text-blue-500 font-semibold cursor-pointer" onClick={handleOnReadMore}>
             {" "}
             Read More
-          </span>
+          </Link>
         </p>
       </div>
 
-      {/* Footer */}
+
+
       <div className="flex items-center justify-between p-4 border-t text-gray-700">
         <div className="flex items-center gap-1">
           {Array.from({ length: Math.floor(rating?.number || 0) }).map(

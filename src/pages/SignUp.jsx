@@ -1,14 +1,14 @@
 import React from "react";
-import { useState, useContext } from "react";
+import {  useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "./../provider/AuthProvider";
 import auth from "./../components/firebase/firebase.config";
 import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
-  const [errorMessage, setErrormessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+ 
 
   const handleOnFormSubmit = (event) => {
     event.preventDefault();
@@ -17,28 +17,25 @@ const SignUp = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const checkbox = event.target.checkbox.checked;
-    setErrormessage("");
-    setSuccessMessage("");
+   
 
     if (!checkbox) {
-      setErrormessage("Please agree to the terms and conditions");
+      toast.error("Please agree to the terms and conditions");
       return;
     }
 
     createUser(email, password)
       .then((result) => {
         console.log(result.user);
-        setSuccessMessage("User created successfully");
-        setErrormessage(" ");
         const profile = { displayName: name, photoURL: photoUrl };
         updateProfile(auth.currentUser, profile).then(() => {
-          setSuccessMessage("User created successfully");
+          toast.success("User created successfully");
         });
       })
       .catch((error) => {
         console.log(error.message);
-        setErrormessage(error.message);
-        setSuccessMessage("");
+        toast.error("User creation failed User already exists");
+
       });
 
     console.log(name, photoUrl, email, password, checkbox);
@@ -127,8 +124,6 @@ const SignUp = () => {
             </div>
           </form>
 
-          {errorMessage && <p className="text-red-600">{errorMessage}</p>}
-          {successMessage && <p className="text-green-600">{successMessage}</p>}
         </div>
       </div>
     </div>

@@ -3,21 +3,25 @@ import auth from "./../components/firebase/firebase.config";
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth";
 
+
 // eslint-disable-next-line react-refresh/only-export-components
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
 
   const [currentUser, setCurentUser] = useState(null);
+  const [loading,setLoading] =useState(false)
 
 
   useEffect(()=>{
    const unSubcribed = onAuthStateChanged(auth,(user)=>{
       setCurentUser(user);
+      setLoading(true)
     })
     return unSubcribed
 
   },[])
+
 
   const googleProvider = new GoogleAuthProvider();
   
@@ -36,7 +40,7 @@ const AuthProvider = ({ children }) => {
     return signOut(auth)
   }
 
-  const authInfo = { createUser, userLogin, userSignOut ,currentUser, gooleLogin };
+  const authInfo = { createUser, userLogin, userSignOut ,currentUser, gooleLogin, loading,  };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
